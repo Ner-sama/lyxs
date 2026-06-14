@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>柳韵新声 - 柳琴戏文化体验</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<nav class="top-nav" id="topNav">
+  <div class="nav-inner">
+    <span class="nav-logo">柳韵新声</span>
+    <div class="nav-links">
+      <a href="#home" class="nav-link active" data-section="home">首页</a>
+      <a href="#quiz" class="nav-link" data-section="quiz">梨园考场</a>
+      <a href="#piano" class="nav-link" data-section="piano">柳琴雅韵</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== 首页 ==================== -->
+<section id="home" class="section active">
+  <div class="home-bg"></div>
+  <div class="home-content">
+    <div class="home-seal">戏</div>
+    <h1 class="home-title">
+      <span class="title-small">国家级非物质文化遗产</span>
+      <span class="title-main">柳韵新声</span>
+      <span class="title-sub">—— 柳琴戏文化传承体验平台 ——</span>
+    </h1>
+    <p class="home-desc">
+      柳琴戏，原名"拉魂腔"，起源于山东临沂地区，<br>
+      已有两百余年历史，是鲁南苏北地区最具代表性的地方戏曲剧种之一。
+    </p>
+    <div class="home-buttons">
+      <button class="btn-primary" onclick="navigateTo('quiz')">
+        📜 进入梨园考场
+      </button>
+      <button class="btn-secondary" onclick="navigateTo('piano')">
+        🎵 体验柳琴雅韵
+      </button>
+    </div>
+    <div class="home-features">
+      <div class="feature-card">
+        <div class="feature-icon">📝</div>
+        <h3>梨园考场</h3>
+        <p>知识单选 · 唱词填空 · 知识判断</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎹</div>
+        <h3>柳琴雅韵</h3>
+        <p>虚拟柳琴弹奏 · 感受拉魂腔音韵</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 梨园考场 ==================== -->
+<section id="quiz" class="section">
+  <div class="quiz-container">
+    <h2 class="section-title">梨园考场</h2>
+    <p class="section-subtitle">测测你对柳琴戏的了解</p>
+
+    <!-- 题目类型标签 -->
+    <div class="quiz-tabs">
+      <button class="quiz-tab active" data-quiz-type="choice">
+        📝 知识单选
+      </button>
+      <button class="quiz-tab" data-quiz-type="fill">
+        📖 唱词填空
+      </button>
+      <button class="quiz-tab" data-quiz-type="truefalse">
+        ✅ 知识判断
+      </button>
+    </div>
+
+    <!-- 单选题专属筛选器 -->
+    <div class="quiz-filter" id="filterChoice">
+      <select id="filterChoiceCat" onchange="applyChoiceFilter()">
+        <option value="all">全部板块</option>
+        <option value="腔调篇">腔调篇</option>
+        <option value="乐器篇">乐器篇</option>
+        <option value="动作篇">动作篇</option>
+      </select>
+      <select id="filterChoiceLevel" onchange="applyChoiceFilter()">
+        <option value="all">全部难度</option>
+        <option value="入门级">⭐ 入门级</option>
+        <option value="进阶级">⭐⭐ 进阶级</option>
+        <option value="高阶">⭐⭐⭐ 高阶</option>
+      </select>
+      <span class="filter-info" id="choiceFilterInfo"></span>
+    </div>
+
+    <!-- 填空题筛选器 -->
+    <div class="quiz-filter" id="filterFill" style="display:none">
+      <select id="filterFillCat" onchange="applyFillFilter()">
+        <option value="all">全部板块</option>
+        <option value="腔调篇">腔调篇</option>
+        <option value="乐器篇">乐器篇</option>
+        <option value="动作篇">动作篇</option>
+      </select>
+      <select id="filterFillLevel" onchange="applyFillFilter()">
+        <option value="all">全部难度</option>
+        <option value="入门级">⭐ 入门级</option>
+        <option value="进阶级">⭐⭐ 进阶级</option>
+        <option value="高阶">⭐⭐⭐ 高阶</option>
+      </select>
+      <span class="filter-info" id="fillFilterInfo"></span>
+    </div>
+
+    <!-- 判断题筛选器 -->
+    <div class="quiz-filter" id="filterTF" style="display:none">
+      <select id="filterTFCat" onchange="applyTFFilter()">
+        <option value="all">全部板块</option>
+        <option value="腔调篇">腔调篇</option>
+        <option value="乐器篇">乐器篇</option>
+        <option value="动作篇">动作篇</option>
+      </select>
+      <select id="filterTFLevel" onchange="applyTFFilter()">
+        <option value="all">全部难度</option>
+        <option value="入门级">⭐ 入门级</option>
+        <option value="进阶级">⭐⭐ 进阶级</option>
+        <option value="高阶">⭐⭐⭐ 高阶</option>
+      </select>
+      <span class="filter-info" id="tfFilterInfo"></span>
+    </div>
+
+    <!-- 进度与分数 -->
+    <div class="quiz-header">
+      <div class="quiz-score">
+        <span>🎯 得分：<strong id="quizScore">0</strong></span>
+        <span>📋 <span id="quizProgress">0/0</span></span>
+      </div>
+      <div class="quiz-stars" id="quizStars">☆☆☆☆☆</div>
+    </div>
+
+    <!-- 知识单选题（10题一关） -->
+    <div id="quizChoice" class="quiz-panel active">
+      <div class="level-nav" id="choiceLevelNav">
+        <button class="level-nav-btn" id="choicePrevBtn" onclick="choicePrevLevel()">◀</button>
+        <span class="level-nav-title" id="choiceLevelTitle">腔调篇 · ⭐ 入门级</span>
+        <button class="level-nav-btn" id="choiceNextBtn" onclick="choiceNextLevel()">▶</button>
+      </div>
+      <div class="level-map" id="choiceLevelMap"></div>
+      <div class="question-list" id="choiceQuestionList"></div>
+      <div class="round-submit-area">
+        <div class="round-score" id="choiceRoundScore" style="display:none"></div>
+        <button class="btn-submit-round" id="choiceSubmitBtn" onclick="submitChoiceRound()">交卷评分</button>
+        <button class="btn-next-round" id="choiceRetryBtn" style="display:none" onclick="initChoiceRound()">重做本关</button>
+      </div>
+    </div>
+
+    <!-- 唱词填空题 -->
+    <div id="quizFill" class="quiz-panel">
+      <div class="question-card">
+        <div class="question-meta" id="fillMeta"></div>
+        <div class="question-number" id="fillNum">第 1 题</div>
+        <div class="lyric-context" id="fillContext"></div>
+        <div class="fill-blank-area">
+          <span>选择填空：</span>
+          <div class="fill-options" id="fillOptions"></div>
+        </div>
+        <div class="question-feedback" id="fillFeedback"></div>
+        <button class="btn-next" id="fillNext" style="display:none" onclick="nextFillQuestion()">下一题 →</button>
+      </div>
+    </div>
+
+    <!-- 知识判断题 -->
+    <div id="quizTruefalse" class="quiz-panel">
+      <div class="question-card">
+        <div class="question-meta" id="tfMeta"></div>
+        <div class="question-number" id="tfNum">第 1 题</div>
+        <div class="question-text" id="tfQuestion"></div>
+        <div class="tf-buttons">
+          <button class="tf-btn tf-correct" id="tfBtnTrue" onclick="checkTrueFalse(true)">✅ 正确</button>
+          <button class="tf-btn tf-wrong" id="tfBtnWrong" onclick="checkTrueFalse(false)">❌ 错误</button>
+        </div>
+        <div class="question-feedback" id="tfFeedback"></div>
+        <button class="btn-next" id="tfNext" style="display:none" onclick="nextTrueFalseQuestion()">下一题 →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 柳琴雅韵 ==================== -->
+<section id="piano" class="section">
+  <div class="piano-container">
+    <h2 class="section-title">柳琴雅韵</h2>
+    <p class="section-subtitle">点击琴键，聆听柳琴之音</p>
+
+    <div class="piano-info">
+      <p>柳琴，又称"柳叶琴""土琵琶"，是柳琴戏的主奏乐器。</p>
+      <p>音色清脆明亮，富有穿透力，被誉为"拉魂腔之魂"。</p>
+    </div>
+
+    <div class="piano-instrument">
+      <div class="piano-body">
+        <div class="piano-decor top-decor"></div>
+        <div class="piano-keys" id="pianoKeys"></div>
+        <div class="piano-decor bottom-decor"></div>
+      </div>
+    </div>
+
+    <div class="piano-controls">
+      <div class="piano-octave">
+        <button class="octave-btn" onclick="shiftOctave(-1)">◀ 低八度</button>
+        <span class="octave-label" id="octaveLabel">中音区</span>
+        <button class="octave-btn" onclick="shiftOctave(1)">高八度 ▶</button>
+      </div>
+      <div class="piano-volume">
+        <span>音量</span>
+        <input type="range" id="volumeSlider" min="0" max="100" value="70" oninput="setVolume(this.value)">
+      </div>
+    </div>
+
+    <div class="piano-scores">
+      <h3>🎼 试试这些旋律</h3>
+      <div class="score-cards" id="scoreCards"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer">
+  <p>柳韵新声 · 柳琴戏文化传承体验平台</p>
+  <p class="footer-note">国家级非物质文化遗产保护项目</p>
+</footer>
+
+<script src="js/questions.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
